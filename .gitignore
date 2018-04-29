@@ -2,3 +2,5 @@
 .ftpquota
 .DS_STORE
 .ipynb_checkpoints
+matlab
+tslearn
