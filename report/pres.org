@@ -79,7 +79,7 @@
 
 * Advanced Classifiers
 ** SVM
-   - given labeled training data (supervised learning), the algorithm outputs an optimal hyperplane which categorizes new examples
+   - Given labeled training data (supervised learning), the algorithm outputs an optimal hyperplane which categorizes new examples
    - Kernel function: linear
    - Train-test split: 70-73
    - Correct classification rate: 0.6027 
