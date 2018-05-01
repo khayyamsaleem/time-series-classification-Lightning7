@@ -6,7 +6,6 @@
 #+SUBTITLE: Demonstrated on the Lightning7 Dataset
 #+latex_header: \AtBeginSection[]{\begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}}
 #+BEAMER_HEADER: \institute[CS559]{CS559 -- Machine Learning Fundamentals and Applications}
-#+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)
 #+AUTHOR: Zachary Saegesser, Khayyam Saleem
 
 * The Dataset
@@ -38,23 +37,78 @@
    [[./images/KM_class.png]]
 ** 6. O (Off-record)  (*special case*)
    [[./images/O_class.png]]
+** All Classes
+   [[./images/ALL_CLASSES.png]]
 ** The Problem
    - Imbalanced data
    - Unequal class representation
    - Curse of dimensionality
+   - Distance Metric
 * Weak Classifiers
-** Naive Bayes
+** Naïve Bayes
    - Essence of Naïve Bayes $\rightarrow$ Given multiple pieces of evidence, treat each piece as independent. 
    - $P(outcome | evidence) = \frac{P(likelihood\_of\_evidence)*(Prior)}{P(evidence)}$
    - Our job is to look at the evidence, to consider how likely it is to be this class or that class, and assign a label to each entity.
    - The class that has the highest probability is declared the "winner" and that class label gets assigned to that combination of evidences.
-   - Gaussian Naïve Bayes $\rightarrow$ assumes means within classes are normally distributed.
+   - Gaussian Naïve Bayes $\rightarrow$ assumes intra-class time series means are normally distributed.
    - With a (default) train-test split of 70-73, we achieved an accuracy of 0.573.
 ** K-Nearest-Neighbors
+   - The training examples are vectors in a multidimensional feature space, each with a class label. The training phase of the algorithm consists only of storing the feature vectors and class labels of the training samples.
+   - In the classification phase, k is a user-defined constant, and an unlabeled vector (a query or test point) is classified by assigning the label which is most frequent among the k training samples nearest to that query point.
+   - Distance Metric: Euclidean vs DTW
+     #+ATTR_LaTeX: :width 2.5cm
+    [[./images/EUC_DTW.png]]
+   - LBKeogh to battle computational complexity
+** 1NN Performance (TTS: 70-73)
+*** Column 1                                          :BMCOL:B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_col: 0.45
+    :BEAMER_env: ignoreheading
+    :END:
+#+ATTR_LaTeX: :width 7.3cm
+    [[./images/1NN_EUC.png]]
+
+*** Column 2                                          :BMCOL:B_ignoreheading:
+    :PROPERTIES:
+    :BEAMER_col: 0.45
+    :BEAMER_env: ignoreheading
+    :END:
+
+#+ATTR_LaTeX: :width 7cm
+    [[./images/1NN_DTW.png]]
+
 * Advanced Classifiers
 ** SVM
+   - given labeled training data (supervised learning), the algorithm outputs an optimal hyperplane which categorizes new examples
+   - Kernel function: linear
+   - Train-test split: 70-73
+   - Correct classification rate: 0.6027 
+** SVM Performance
+   [[./images/SVM_confusion.png]]
 ** CNN
+   - Based on model used to effectively classify human activity time series data
+   - Intuition for CNN's on images carry over to time-series. The main difference in the code is the stride argument we pass to the conv-layer.
+   - We want the kernel to stride along the time-series, but not along the second dimension that we would have used for images.
+   - Architecture: 3 Convolutional Layers, with Batch Normalization between and SoftMax activation functions in fully-connected layers
+   - Train-test split: 70-73
+   - Accuracy on validation data over 3000 iterations: 0.639
 ** RNN
-* Future Work
-** Hyperparameter Tuning
-** Feature Preprocessing
+   - Class of artificial neural network where connections between units form a directed graph along a sequence.
+   - Can use their internal state (memory) to process sequences of inputs.
+   - LSTM $\rightarrow$ cell is responsible for "remembering" values over arbitrary time intervals
+   - Train-test split: 70-73
+   - Accuracy: 0.8904
+* Conclusion
+** Ranking
+   | *1)* LSTM-RNN                  | (0.8904) |
+   | *2)* 1NN with DTW Distance Metric | (0.7700) |
+   | *3)* CNN                       | (0.6390) |
+   | *4)* SVM                       | (0.6027) |
+   | *5)* Naïve Bayes               | (0.5730) |
+** Citations
+   - http://timewarping.org/TSCU/doc/html/tscu_tutorial.html
+   - http://robromijnders.github.io/CNN_tsc/
+   - https://github.com/titu1994/LSTM-FCN
+   - Damian R. Eads, Daniel Hill, Sean Davis, Simon J. Perkins, Junshui Ma, Reid B. Porter, James P. Theiler, "Genetic Algorithms and Support Vector Machines for Time Series Classification," Proc. SPIE 4787, Applications and Science of Neural Networks, Fuzzy Systems, and Evolutionary Computation V, (6 December 2002);
+   - http://alexminnaar.com/time-series-classification-and-clustering-with-python.html
+   - http://timeseriesclassification.com/description.php?Dataset=Lightning7
