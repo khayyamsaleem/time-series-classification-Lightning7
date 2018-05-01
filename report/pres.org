@@ -1,0 +1,60 @@
+#+STARTUP: noindent showall beamer
+#+TITLE: Performance Analysis of Different Time Series Classification Techniques
+#+OPTIONS: toc:t H:2 date:nil
+#+BEAMER_FRAME_LEVEL: 2
+#+LATEX_HEADER: \setbeamertemplate{navigation symbols}{}
+#+SUBTITLE: Demonstrated on the Lightning7 Dataset
+#+latex_header: \AtBeginSection[]{\begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}}
+#+BEAMER_HEADER: \institute[CS559]{CS559 -- Machine Learning Fundamentals and Applications}
+#+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)
+#+AUTHOR: Zachary Saegesser, Khayyam Saleem
+
+* The Dataset
+** Lightning7
+   - The FORTE satellite detects transient electromagnetic events associated with lightning using a suite of optical and radio-frequency (RF) instruments.
+   - A Fourier transform is performed on the input data to produce a spectrogram.
+   - The spectrograms are then collapsed in frequency to produce a power density time series, which is then smoothed.
+** Classes
+   0. CG (Positive Initial Return Stroke)
+   1. IR (Negative Initial Return Strokes)
+   2. SR (Subsequent Negative Return Stroke)
+   3. I (Impulsive Event)
+   4. I2 (Impulsive Event Pair)
+   5. KM (Gradual Intra-Cloud Smoke)
+   6. O (Off-record)  (*special case*)
+** Visualization of Classes 
+    [[./images/classes.png]]
+** 0. CG (Positive Initial Return Stroke)
+   [[./images/CG_class.png]]
+** 1. IR (Negative Initial Return Strokes)
+   [[./images/IR_class.png]]
+** 2. SR (Subsequent Negative Return Stroke)
+   [[./images/SR_class.png]]
+** 3. I (Impulsive Event)
+   [[./images/I_class.png]]
+** 4. I2 (Impulsive Event Pair)
+   [[./images/I2_class.png]]
+** 5. KM (Gradual Intra-Cloud Smoke)
+   [[./images/KM_class.png]]
+** 6. O (Off-record)  (*special case*)
+   [[./images/O_class.png]]
+** The Problem
+   - Imbalanced data
+   - Unequal class representation
+   - Curse of dimensionality
+* Weak Classifiers
+** Naive Bayes
+   - Essence of Naïve Bayes $\rightarrow$ Given multiple pieces of evidence, treat each piece as independent. 
+   - $P(outcome | evidence) = \frac{P(likelihood\_of\_evidence)*(Prior)}{P(evidence)}$
+   - Our job is to look at the evidence, to consider how likely it is to be this class or that class, and assign a label to each entity.
+   - The class that has the highest probability is declared the "winner" and that class label gets assigned to that combination of evidences.
+   - Gaussian Naïve Bayes $\rightarrow$ assumes means within classes are normally distributed.
+   - With a (default) train-test split of 70-73, we achieved an accuracy of 0.573.
+** K-Nearest-Neighbors
+* Advanced Classifiers
+** SVM
+** CNN
+** RNN
+* Future Work
+** Hyperparameter Tuning
+** Feature Preprocessing
