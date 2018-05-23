@@ -15,17 +15,17 @@
    - The spectrograms are then collapsed in frequency to produce a power density time series, which is then smoothed.
 ** Classes
    0. CG (Positive Initial Return Stroke)
-   1. IR (Negative Initial Return Strokes)
+   1. IR (Negative Initial Return Stroke)
    2. SR (Subsequent Negative Return Stroke)
    3. I (Impulsive Event)
    4. I2 (Impulsive Event Pair)
-   5. KM (Gradual Intra-Cloud Smoke)
+   5. KM (Gradual Intra-Cloud Stroke)
    6. O (Off-record)  (*special case*)
 ** Visualization of Classes 
     [[./images/classes.png]]
 ** 0. CG (Positive Initial Return Stroke)
    [[./images/CG_class.png]]
-** 1. IR (Negative Initial Return Strokes)
+** 1. IR (Negative Initial Return Stroke)
    [[./images/IR_class.png]]
 ** 2. SR (Subsequent Negative Return Stroke)
    [[./images/SR_class.png]]
@@ -33,7 +33,7 @@
    [[./images/I_class.png]]
 ** 4. I2 (Impulsive Event Pair)
    [[./images/I2_class.png]]
-** 5. KM (Gradual Intra-Cloud Smoke)
+** 5. KM (Gradual Intra-Cloud Stroke)
    [[./images/KM_class.png]]
 ** 6. O (Off-record)  (*special case*)
    [[./images/O_class.png]]
